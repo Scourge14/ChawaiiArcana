@@ -1,0 +1,985 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #F7F1E8;
+  --bg-card: #FFF9F0;
+  --bg-soft: #EFE4D4;
+  --bg-muted: #E2D4C2;
+
+  --text-main: #142033;
+  --text-secondary: #4B5563;
+  --text-muted: #6B6258;
+  --text-disabled: #A79D91;
+
+  --navy: #142033;
+  --navy-hover: #1D2C44;
+  --navy-active: #0E1726;
+
+  --gold: #C9A45C;
+  --gold-soft: #E4C987;
+  --gold-dark: #9C7431;
+
+  --sage: #6F8376;
+  --sage-hover: #5E7166;
+  --sage-active: #4F6258;
+
+  --mauve: #8E5572;
+  --mauve-hover: #7B4863;
+  --mauve-soft: #F0DDE6;
+
+  --border-gold: rgba(201, 164, 92, 0.45);
+  --border-soft: rgba(20, 32, 51, 0.10);
+  --input-border: #D8C8B3;
+
+  --shadow-panel: 0 18px 45px rgba(20, 32, 51, 0.12);
+  --shadow-card: 0 12px 30px rgba(20, 32, 51, 0.10);
+  --shadow-gold-glow: 0 0 28px rgba(201, 164, 92, 0.35);
+
+  --gradient-navy: linear-gradient(135deg, #0E1726 0%, #1D2C44 100%);
+  --gradient-sage: linear-gradient(135deg, #6F8376 0%, #4F6258 100%);
+  --gradient-mauve: linear-gradient(135deg, #8E5572 0%, #6D3F57 100%);
+  --gradient-gold: radial-gradient(circle, #E4C987 0%, #C9A45C 100%);
+}
+
+[data-theme="dark"] {
+  --bg-main: #07030D;
+  --bg-card: #140B22;
+  --bg-soft: #1B102D;
+  --bg-muted: #24163A;
+
+  --text-main: #FFF9F0;
+  --text-secondary: #E8DCCB;
+  --text-muted: #C9BDAE;
+  --text-disabled: #8E8391;
+
+  --navy: #FFF9F0;
+  --navy-hover: #F0E4D4;
+  --navy-active: #D9C9B2;
+
+  --gold: #D7B66F;
+  --gold-soft: #F1D790;
+  --gold-dark: #A77C34;
+
+  --sage: #8BA998;
+  --sage-hover: #7A9787;
+  --sage-active: #668171;
+
+  --mauve: #A46A91;
+  --mauve-hover: #B77AA3;
+  --mauve-soft: rgba(164, 106, 145, 0.22);
+
+  --border-gold: rgba(215, 182, 111, 0.42);
+  --border-soft: rgba(255, 249, 240, 0.12);
+  --input-border: rgba(215, 182, 111, 0.28);
+
+  --shadow-panel: 0 22px 70px rgba(0, 0, 0, 0.42);
+  --shadow-card: 0 16px 38px rgba(0, 0, 0, 0.34);
+  --shadow-gold-glow: 0 0 34px rgba(215, 182, 111, 0.28);
+
+  --gradient-navy: linear-gradient(135deg, #211238 0%, #09040F 100%);
+  --gradient-sage: linear-gradient(135deg, #668171 0%, #42574D 100%);
+  --gradient-mauve: linear-gradient(135deg, #A46A91 0%, #6D3F57 100%);
+  --gradient-gold: radial-gradient(circle, #F1D790 0%, #D7B66F 100%);
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100svh;
+    background: var(--bg-main);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+
+  button,
+  select {
+    font: inherit;
+  }
+
+  select {
+    color-scheme: light;
+  }
+}
+
+@layer components {
+  main[data-theme] {
+    background: var(--bg-main);
+    color: var(--text-main);
+  }
+
+  .app-frame {
+    @apply relative min-h-[calc(100svh-1.5rem)] overflow-hidden rounded-[24px] border border-champagne/25 bg-pearl/85 shadow-aura backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 24px 70px rgba(20, 34, 56, 0.18);
+    background: color-mix(in srgb, var(--bg-card) 86%, transparent);
+    border-color: var(--border-gold);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .app-header {
+    @apply relative z-40 flex min-h-[72px] items-center justify-between border-b border-champagne/20 px-5 sm:px-10;
+    background: rgba(255, 249, 240, 0.72);
+    background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+    border-color: var(--border-gold);
+  }
+
+  .brand-lockup {
+    @apply flex min-h-[48px] touch-manipulation items-center gap-2 rounded-full pr-3 font-display text-3xl text-ink transition hover:text-champagne;
+    color: var(--text-main);
+  }
+
+  .brand-sun {
+    @apply grid size-9 place-items-center rounded-full text-3xl text-champagne;
+    color: var(--gold);
+  }
+
+  .header-nav {
+    @apply hidden items-center gap-9 text-sm font-medium text-ink-soft md:flex;
+    color: var(--text-muted);
+  }
+
+  .header-nav button {
+    @apply relative min-h-[44px] transition hover:text-ink;
+  }
+
+  .header-nav .nav-active {
+    @apply text-ink;
+    color: var(--text-main);
+  }
+
+  .header-nav .nav-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -14px;
+    height: 2px;
+    background: #c89b3c;
+    background: var(--gold);
+  }
+
+  .header-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .header-actions span {
+    @apply grid size-10 place-items-center rounded-full border border-champagne/30 bg-white/35 text-lg text-ink-soft;
+    border-color: var(--border-gold);
+    background: color-mix(in srgb, var(--bg-card) 55%, transparent);
+    color: var(--text-muted);
+  }
+
+  .theme-toggle {
+    @apply grid size-10 touch-manipulation place-items-center rounded-full border text-lg transition hover:-translate-y-0.5 active:translate-y-0;
+    border-color: var(--border-gold);
+    background: color-mix(in srgb, var(--bg-card) 60%, transparent);
+    color: var(--gold);
+  }
+
+  .screen-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 900px) {
+    .screen-grid {
+      grid-template-columns: 0.92fr 1.08fr;
+    }
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.28em] text-champagne;
+  }
+
+  .glass-panel {
+    @apply rounded-[32px] border border-champagne/25 bg-pearl/75 shadow-aura backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.88),
+      0 26px 70px rgba(20, 34, 56, 0.12);
+    background: color-mix(in srgb, var(--bg-card) 76%, transparent);
+    border-color: var(--border-gold);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button {
+    @apply min-h-[54px] touch-manipulation select-none rounded-full px-6 text-center text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mauve/30;
+  }
+
+  .primary-button {
+    @apply text-white shadow-gold hover:-translate-y-0.5 active:translate-y-0;
+    background: linear-gradient(135deg, #132136 0%, #1c2d46 68%, #314a61 125%);
+    box-shadow: 0 0 0 1px rgba(200, 155, 60, 0.24), 0 18px 48px rgba(20, 34, 56, 0.2);
+    background: var(--gradient-navy);
+    color: var(--bg-card);
+  }
+
+  .continue-button {
+    background: var(--gradient-sage);
+  }
+
+  .save-button,
+  .see-reading-button:not(:disabled) {
+    background: var(--gradient-mauve);
+  }
+
+  .see-reading-button:disabled {
+    background: linear-gradient(135deg, var(--bg-muted), var(--bg-soft));
+    color: var(--text-disabled);
+    box-shadow: none;
+  }
+
+  .secondary-button {
+    @apply border border-champagne/50 bg-pearl/80 text-ink shadow-sm hover:-translate-y-0.5 hover:bg-champagne/10 active:translate-y-0;
+    background: transparent;
+    border-color: var(--border-gold);
+    color: var(--text-main);
+  }
+
+  .shuffle-button {
+    background: var(--gradient-navy);
+    color: var(--bg-card);
+    border-color: transparent;
+  }
+
+  .ghost-button {
+    @apply border border-champagne/30 bg-white/50 text-ink hover:bg-white/75 disabled:cursor-not-allowed disabled:opacity-45;
+    background: color-mix(in srgb, var(--bg-card) 55%, transparent);
+    color: var(--text-main);
+    border-color: var(--border-gold);
+  }
+
+  .hero-card {
+    @apply relative flex aspect-[0.68] w-[245px] flex-col items-center justify-between overflow-hidden rounded-[34px] border border-champagne/60 bg-pearl px-8 py-10 shadow-mauve;
+    background:
+      radial-gradient(circle at 50% 28%, rgba(200, 155, 60, 0.2), transparent 31%),
+      linear-gradient(145deg, rgba(255, 249, 240, 0.96), rgba(242, 228, 207, 0.96));
+    background:
+      radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--gold) 20%, transparent), transparent 31%),
+      linear-gradient(145deg, var(--bg-card), var(--bg-soft));
+    border-color: var(--border-gold);
+  }
+
+  .tilt-card {
+    transform: rotate(-4deg);
+  }
+
+  .celestial-ring {
+    @apply absolute rounded-full border border-champagne/35;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0) 58%, rgba(212, 175, 55, 0.14) 59%, transparent 60%),
+      conic-gradient(from 70deg, transparent 0deg 62deg, rgba(212, 175, 55, 0.5) 62deg 66deg, transparent 66deg 360deg);
+    animation: slow-spin 24s linear infinite;
+  }
+
+  .field-card {
+    @apply rounded-[26px] border border-champagne/25 bg-white/65 p-4 shadow-sm;
+    background: color-mix(in srgb, var(--bg-card) 72%, transparent);
+    border-color: var(--border-gold);
+  }
+
+  .field-card > span {
+    @apply mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-ink;
+    color: var(--text-main);
+  }
+
+  .field-card select {
+    @apply min-h-[58px] w-full rounded-2xl border border-champagne/25 bg-pearl px-4 text-base font-semibold text-ink outline-none transition focus:border-champagne focus:ring-4 focus:ring-champagne/20;
+    background: var(--bg-card);
+    border-color: var(--input-border);
+    color: var(--text-main);
+  }
+
+  .field-card select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201, 164, 92, 0.14);
+  }
+
+  .segmented-grid {
+    @apply grid grid-cols-2 gap-2;
+  }
+
+  .segmented-grid button {
+    @apply min-h-[54px] touch-manipulation select-none rounded-2xl border border-champagne/25 bg-pearl/80 px-3 text-sm font-semibold text-ink transition hover:border-champagne/45 hover:bg-white;
+    background: color-mix(in srgb, var(--bg-card) 82%, transparent);
+    border-color: var(--input-border);
+    color: var(--text-main);
+  }
+
+  .segmented-grid .segment-active {
+    @apply border-champagne/70 text-white shadow-gold;
+    background: var(--gradient-sage);
+    color: var(--bg-card);
+  }
+
+  .tarot-grid {
+    @apply grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6;
+  }
+
+  .tarot-card-shell {
+    @apply relative mx-auto flex aspect-[0.68] w-full max-w-[156px] overflow-hidden rounded-[22px] border p-4 transition duration-300;
+    animation: card-rise 440ms ease both;
+    transform-style: preserve-3d;
+    box-shadow: 0 18px 42px rgba(20, 34, 56, 0.14);
+    box-shadow: var(--shadow-card);
+  }
+
+  .tarot-card-closed {
+    @apply border-champagne/50 bg-pearl;
+    background:
+      linear-gradient(90deg, rgba(200, 155, 60, 0.1) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(200, 155, 60, 0.08) 1px, transparent 1px),
+      radial-gradient(circle at 50% 44%, rgba(200, 155, 60, 0.18), transparent 30%),
+      linear-gradient(145deg, #fff9f0, #efe0c8);
+    background-size: 28px 28px, 28px 28px, auto, auto;
+    background:
+      linear-gradient(90deg, rgba(201, 164, 92, 0.1) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(201, 164, 92, 0.08) 1px, transparent 1px),
+      linear-gradient(180deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+    border-color: rgba(201, 164, 92, 0.55);
+  }
+
+  .tarot-card-open {
+    @apply border-champagne/60 bg-pearl;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(200, 155, 60, 0.16), transparent 30%),
+      linear-gradient(160deg, rgba(255, 249, 240, 0.98), rgba(246, 237, 221, 0.96));
+    background:
+      radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 30%),
+      linear-gradient(160deg, var(--bg-card), var(--bg-soft));
+    border-color: rgba(201, 164, 92, 0.6);
+    animation-name: card-rise, card-flip;
+    animation-duration: 440ms, 700ms;
+    animation-timing-function: ease, cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-fill-mode: both;
+  }
+
+  .tarot-card-selected {
+    @apply -translate-y-2 border-champagne;
+    box-shadow:
+      0 0 0 2px rgba(200, 155, 60, 0.34),
+      0 0 36px rgba(200, 155, 60, 0.28),
+      0 22px 70px rgba(20, 34, 56, 0.16);
+    animation: selected-pulse 1.6s ease-in-out infinite;
+    box-shadow: var(--shadow-gold-glow), 0 18px 40px rgba(20, 32, 51, 0.14);
+  }
+
+  .tarot-corner {
+    @apply absolute size-7 border-champagne/50;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .card-back-orbit {
+    @apply grid size-20 place-items-center rounded-full border border-champagne/45 text-4xl;
+    background: radial-gradient(circle, rgba(200, 155, 60, 0.18), transparent 70%);
+  }
+
+  .shuffle-pulse .tarot-card-shell {
+    animation: shuffle-card 760ms ease both;
+  }
+
+  .result-card-grid {
+    @apply grid gap-5 sm:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .result-card-grid .tarot-card-shell {
+    @apply max-w-[190px];
+  }
+
+  .mini-stat {
+    @apply rounded-2xl border border-champagne/25 bg-white/65 p-4;
+  }
+
+  .mini-stat span {
+    @apply block text-xs uppercase tracking-[0.2em] text-champagne;
+  }
+
+  .mini-stat strong {
+    @apply mt-2 block text-xl font-semibold text-ink;
+  }
+
+  .history-item {
+    @apply rounded-[26px] border border-champagne/20 bg-white/65 p-5 shadow-sm;
+  }
+
+  .card-chip {
+    @apply rounded-full border border-champagne/25 bg-pearl/80 px-3 py-2 text-sm font-semibold text-ink-soft;
+  }
+
+  .empty-state {
+    @apply flex min-h-[320px] flex-col items-center justify-center rounded-[28px] border border-dashed border-champagne/45 bg-white/35 p-8 text-center;
+  }
+
+  .screen-enter {
+    animation: screen-enter 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    padding-bottom: 7rem !important;
+  }
+
+  .step-progress {
+    @apply absolute bottom-0 left-0 right-0 z-30 flex gap-3 rounded-none border-t border-champagne/20 bg-ink px-5 py-3 shadow-none backdrop-blur-xl sm:px-10;
+    background: #142033;
+  }
+
+  .step-item {
+    @apply flex min-h-[42px] flex-1 items-center justify-center gap-2 rounded-full px-2 text-xs font-semibold text-pearl/70 transition;
+  }
+
+  .step-item span {
+    @apply grid size-7 place-items-center rounded-full border border-pearl/25 text-[11px] text-pearl/80;
+  }
+
+  .step-active {
+    @apply text-pearl;
+  }
+
+  .step-active span {
+    @apply border-champagne/70 bg-champagne text-ink;
+  }
+
+  .reading-panel {
+    @apply rounded-[28px] border border-champagne/25 bg-white/65 px-5 py-6 text-ink shadow-aura;
+    background: color-mix(in srgb, var(--bg-card) 78%, transparent);
+    border-color: var(--border-gold);
+    color: var(--text-main);
+  }
+
+  .interpretation-card {
+    @apply rounded-3xl border border-champagne/20 bg-white/65 p-4 opacity-0;
+    animation: text-fade 520ms ease both;
+    background: color-mix(in srgb, var(--bg-card) 72%, transparent);
+    border-color: var(--border-gold);
+  }
+
+  .card-reveal {
+    opacity: 0;
+    animation: result-reveal 680ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .card-illustration {
+    @apply relative grid size-24 place-items-center overflow-hidden rounded-[24px] border border-champagne/35 bg-pearl text-ink shadow-inner;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(200, 155, 60, 0.18), transparent 42%),
+      linear-gradient(160deg, rgba(255, 249, 240, 0.98), rgba(238, 223, 199, 0.9));
+  }
+
+  .card-illustration::before,
+  .card-illustration::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .card-illustration::before {
+    inset: 14px;
+    border: 1px solid rgba(200, 155, 60, 0.22);
+  }
+
+  .card-illustration::after {
+    width: 86px;
+    height: 34px;
+    bottom: -10px;
+    background: rgba(111, 135, 121, 0.18);
+  }
+
+  .illustration-mark {
+    @apply relative z-10 font-display text-5xl leading-none text-ink;
+  }
+
+  .illustration-accent {
+    @apply absolute right-4 top-3 z-10 text-lg text-champagne;
+  }
+
+  .illustration-ground {
+    @apply absolute bottom-4 h-px w-14 bg-champagne/40;
+  }
+
+  .card-illustration-moon {
+    background:
+      radial-gradient(circle at 62% 42%, #142238 0 22px, transparent 23px),
+      radial-gradient(circle at 72% 33%, #fff9f0 0 17px, transparent 18px),
+      linear-gradient(160deg, #f8efe1, #d7c3a4);
+  }
+
+  .card-illustration-sun {
+    background:
+      repeating-conic-gradient(from 0deg, rgba(200, 155, 60, 0.4) 0deg 7deg, transparent 7deg 18deg),
+      radial-gradient(circle at 50% 50%, #fff4d5 0 24px, rgba(200, 155, 60, 0.22) 25px 33px, transparent 34px),
+      linear-gradient(160deg, #fff9f0, #ecd9b9);
+  }
+
+  .card-illustration-star {
+    background:
+      radial-gradient(circle at 35% 32%, rgba(20, 34, 56, 0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 70% 52%, rgba(200, 155, 60, 0.32) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 48%, rgba(200, 155, 60, 0.2), transparent 36%),
+      linear-gradient(160deg, #fff9f0, #e6d7c2);
+  }
+
+  .card-illustration-lion .illustration-mark {
+    color: #9f7440;
+  }
+
+  .card-illustration-lovers {
+    background:
+      radial-gradient(circle at 36% 52%, rgba(164, 95, 132, 0.22) 0 20px, transparent 21px),
+      radial-gradient(circle at 64% 52%, rgba(200, 155, 60, 0.22) 0 20px, transparent 21px),
+      linear-gradient(160deg, #fff9f0, #ecd9c3);
+  }
+
+  .card-illustration-tower {
+    background:
+      linear-gradient(90deg, transparent 38%, rgba(20, 34, 56, 0.16) 39% 61%, transparent 62%),
+      radial-gradient(circle at 50% 18%, rgba(200, 155, 60, 0.28), transparent 25%),
+      linear-gradient(160deg, #fff9f0, #e4d2b8);
+  }
+
+  .card-illustration-garden {
+    background:
+      radial-gradient(circle at 50% 54%, rgba(111, 135, 121, 0.24) 0 28px, transparent 29px),
+      linear-gradient(160deg, #fff9f0, #e7dcc9);
+  }
+
+  .card-illustration-crown,
+  .card-illustration-temple,
+  .card-illustration-scales,
+  .card-illustration-wheel,
+  .card-illustration-path,
+  .card-illustration-lantern,
+  .card-illustration-water {
+    background:
+      radial-gradient(circle at 50% 42%, rgba(200, 155, 60, 0.2), transparent 34%),
+      linear-gradient(160deg, #fff9f0, #e8d7bd);
+    background:
+      radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 42%),
+      linear-gradient(160deg, var(--bg-card), var(--bg-soft));
+    border-color: var(--border-gold);
+  }
+
+  .universe-note {
+    @apply rounded-2xl border px-4 py-3;
+    border-color: var(--border-gold);
+    background: color-mix(in srgb, var(--mauve-soft) 55%, var(--bg-card));
+  }
+
+  .universe-note span {
+    @apply text-xs font-bold uppercase tracking-[0.22em];
+    color: var(--mauve);
+  }
+
+  .universe-note p {
+    @apply mt-2 text-sm leading-6;
+    color: var(--text-main);
+  }
+
+  [data-theme="dark"] .text-ink,
+  [data-theme="dark"] .text-ink-soft {
+    color: var(--text-main) !important;
+  }
+
+  [data-theme="dark"] .text-ink-soft\/60,
+  [data-theme="dark"] .text-ink-soft\/70,
+  [data-theme="dark"] .text-ink-soft\/75 {
+    color: var(--text-muted) !important;
+  }
+
+  [data-theme="dark"] .bg-pearl,
+  [data-theme="dark"] .bg-pearl\/60,
+  [data-theme="dark"] .bg-pearl\/70,
+  [data-theme="dark"] .bg-pearl\/75,
+  [data-theme="dark"] .bg-pearl\/80,
+  [data-theme="dark"] .bg-pearl\/85 {
+    background-color: color-mix(in srgb, var(--bg-card) 82%, transparent) !important;
+  }
+}
+
+@layer utilities {
+  .paper-grain {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    opacity: 0.9;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(200, 155, 60, 0.2) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 40%, rgba(111, 135, 121, 0.14) 0 1px, transparent 1px),
+      radial-gradient(circle at 18% 84%, rgba(164, 95, 132, 0.08), transparent 28%),
+      radial-gradient(circle at 82% 12%, rgba(200, 155, 60, 0.12), transparent 30%),
+      linear-gradient(135deg, #f5eee4 0%, #fff9f0 48%, #eadcc8 100%);
+    background-size: 44px 44px, 62px 62px, 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  .background-moon {
+    pointer-events: none;
+    position: fixed;
+    right: min(9vw, 120px);
+    top: 44px;
+    width: 140px;
+    height: 140px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    box-shadow: inset 24px 0 0 rgba(200, 155, 60, 0.13), 0 0 80px rgba(200, 155, 60, 0.12);
+    opacity: 0.72;
+  }
+
+  .background-line {
+    pointer-events: none;
+    position: fixed;
+    width: 240px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    transform: rotate(-28deg);
+  }
+
+  [data-theme="dark"] .paper-grain {
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(215, 182, 111, 0.16) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 38%, rgba(164, 106, 145, 0.16) 0 1px, transparent 1px),
+      radial-gradient(circle at 20% 82%, rgba(164, 106, 145, 0.2), transparent 30%),
+      radial-gradient(circle at 82% 14%, rgba(215, 182, 111, 0.12), transparent 28%),
+      linear-gradient(135deg, var(--bg-main) 0%, #12081f 48%, #08030d 100%);
+  }
+
+  [data-theme="dark"] .background-moon {
+    box-shadow: inset 24px 0 0 rgba(215, 182, 111, 0.16), 0 0 90px rgba(164, 106, 145, 0.2);
+  }
+}
+
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes result-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes text-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-flip {
+  from {
+    transform: rotateY(-16deg) scale(0.98);
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes selected-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.14);
+  }
+}
+
+@keyframes shuffle-card {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  35% {
+    transform: translateX(10px) rotate(3deg);
+  }
+  70% {
+    transform: translateX(-8px) rotate(-3deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .background-moon {
+    width: 96px;
+    height: 96px;
+    right: 18px;
+    top: 20px;
+  }
+
+  .tarot-card-shell {
+    max-width: none;
+    border-radius: 18px;
+    padding: 0.85rem;
+  }
+
+  .step-progress {
+    top: auto;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    width: calc(100% - 1rem);
+    padding: 0.35rem;
+  }
+
+  .step-item {
+    min-height: 38px;
+    gap: 0.35rem;
+    padding-inline: 0.25rem;
+    font-size: 0.68rem;
+  }
+
+  .step-item span {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .screen-enter {
+    padding-bottom: 5.5rem;
+  }
+}
+
+
+@media (max-width: 640px) {
+  main[data-theme] {
+    padding: 0.5rem;
+  }
+
+  .app-frame {
+    min-height: calc(100svh - 1rem);
+    border-radius: 18px;
+  }
+
+  .app-header {
+    min-height: 62px;
+    padding-inline: 0.75rem;
+  }
+
+  .brand-lockup {
+    min-width: 0;
+    padding-right: 0.35rem;
+    font-size: clamp(1.55rem, 9vw, 2rem);
+  }
+
+  .brand-sun,
+  .theme-toggle,
+  .header-actions span {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .header-actions span {
+    display: none;
+  }
+
+  .screen-grid {
+    gap: 1rem;
+  }
+
+  .screen-grid > div:first-child {
+    max-width: none;
+  }
+
+  .screen-grid > div:last-child {
+    min-height: 330px;
+  }
+
+  .screen-enter {
+    min-height: auto !important;
+    padding: 1.35rem 1rem 6rem !important;
+  }
+
+  .screen-enter h1,
+  .screen-enter h2 {
+    font-size: clamp(2.9rem, 15vw, 4.6rem) !important;
+    line-height: 0.94 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .screen-enter p,
+  .history-item,
+  .interpretation-card,
+  .reading-panel {
+    overflow-wrap: anywhere;
+  }
+
+  .glass-panel {
+    border-radius: 22px;
+  }
+
+  .hero-card {
+    width: min(70vw, 220px);
+    border-radius: 26px;
+    padding: 1.6rem;
+  }
+
+  .tilt-card {
+    transform: rotate(-2deg);
+  }
+
+  .celestial-ring {
+    width: min(86vw, 310px);
+    height: min(86vw, 310px);
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button {
+    width: 100%;
+    min-height: 50px;
+    padding-inline: 1rem;
+  }
+
+  .field-card {
+    border-radius: 20px;
+    padding: 0.9rem;
+  }
+
+  .field-card select,
+  .segmented-grid button {
+    min-height: 50px;
+  }
+
+  .tarot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .tarot-card-shell {
+    min-width: 0;
+    max-width: 150px;
+    padding: 0.7rem;
+  }
+
+  .card-back-orbit {
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+  }
+
+  .result-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .result-card-grid .tarot-card-shell {
+    max-width: 168px;
+  }
+
+  .mini-stat {
+    min-width: 0;
+    padding: 0.85rem;
+  }
+
+  .mini-stat strong {
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+  }
+
+  .history-item {
+    border-radius: 20px;
+    padding: 1rem;
+  }
+
+  .empty-state {
+    min-height: 260px;
+    border-radius: 22px;
+    padding: 1.25rem;
+  }
+
+  .card-chip {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .step-progress {
+    gap: 0.25rem;
+  }
+
+  .step-item {
+    flex-direction: column;
+    gap: 0.15rem;
+    min-height: 44px;
+    font-size: 0.58rem;
+    line-height: 1;
+  }
+
+  .step-item strong {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tarot-card-shell {
+    max-width: 138px;
+  }
+
+  .card-illustration {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 18px;
+  }
+
+  .illustration-mark {
+    font-size: 2.45rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .step-item strong {
+    display: none;
+  }
+
+  .tarot-card-shell {
+    max-width: 128px;
+    padding: 0.6rem;
+  }
+
+  .card-back-orbit {
+    width: 3.45rem;
+    height: 3.45rem;
+  }
+
+  .segmented-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
